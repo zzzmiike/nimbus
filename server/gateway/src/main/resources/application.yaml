@@ -1,0 +1,41 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          "[/**]":
+            allowedOrigins: "http://localhost:5173"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+      routes:
+        - id: teams
+          uri: http://localhost:3000
+          predicates:
+            - Path=/teams/**
+        - id: users
+          uri: http://localhost:3000
+          predicates:
+            - Path=/users/**
+        - id: injuries
+          uri: http://localhost:3000
+          predicates:
+            - Path=/injuries/**
+        - id: athlete-descs
+          uri: http://localhost:3000
+          predicates:
+            - Path=/athlete-descs/**
+        - id: athletes
+          uri: http://localhost:3000
+          predicates:
+            - Path=/athletes/**
+        - id: coaches
+          uri: http://localhost:3000
+          predicates:
+            - Path=/coaches/**
